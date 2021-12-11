@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100&display=swap" rel="stylesheet">
+    <title>snake game</title>
+</head>
+<body>
+    <div id='board'>
+        <div id='game'>
+            <div id='title'>snake game</div>
+            <canvas id='canvas' width='800' height='600'></canvas>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type='module'>
+        import { Render } from './render.js'
+        const socket = io()
+        const canvas = document.querySelector('#canvas')
+
+        socket.on('connect', () => {
+            const playerId = socket.id
+            const render = new Render(playerId, canvas)
+
+            socket.on('set-state', (state) => {
+                render.gameState(state)
+            })
+
+            document.addEventListener('keydown', (event) => {
+                socket.emit('move-player', {id: playerId, direction: event.key})
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+body {
+    color: #fff;
+    background-color: #333;
+    position: absolute; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    font-family: 'Work Sans', sans-serif;
+}
+
+#title {
+    padding: 5px;
+}
+
+#canvas {
+    width: 800px;
+    height: 600px;
+}
+
+.no-show {
+    display: none;
+}
+
+#board {
+    width: 800px;
+    height: 660px;
+    font-size: 40px;
+    text-align: center;
+    padding: 5px;
+    box-shadow: -30px -30px 50px #444, 30px 30px 50px #222;
+}
